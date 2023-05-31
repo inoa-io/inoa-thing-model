@@ -1,0 +1,43 @@
+{
+    "@context": [
+      "https://www.w3.org/2022/wot/td/v1.1",
+      {
+        "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+      }
+    ],
+    "@type": "tm:ThingModel",
+    "title": "Hono Gateway",
+    "version": {
+      "model": "1.0.0"
+    },
+    "tm:optional": [],
+    "properties": {
+        "secrets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                  "type" : {
+                    "type" : "string",
+                    "enum": ["psk", "x509-cert"]
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                    "type",
+                    "enabled",
+                    "value"
+                ]
+
+            }
+        }
+    }
+  }

@@ -1,0 +1,54 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+      "time": "http://www.w3.org/2006/time#",
+      "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "INOA Satellite",
+  "description": "A INOA Satellite",
+  "version": {
+    "model": "1.0.2"
+  },
+  "links": [
+    {
+      "rel": "tm:submodel",
+      "href": "https://raw.githubusercontent.com/inoa-io/inoa-thing-model/main/hono-gateway-1.0.1.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "Hono"
+    }
+  ],
+  "tm:optional": [],
+  "properties": {
+    "manufacturer": {
+      "title": "Manufacturer",
+      "type": "string",
+      "readOnly": true
+    },
+    "serial": {
+      "title": "Serial number",
+      "type": "string",
+      "readOnly": true
+    },
+    "version": {
+      "title": "board version",
+      "type": "string",
+      "readOnly": true
+    },
+    "location": {
+      "@type": "geo:Point",
+      "title": "board location",
+      "type": "point"
+    },
+    "tags": {
+      "title": "tags",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
