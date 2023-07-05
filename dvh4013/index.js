@@ -3,7 +3,7 @@ import {Buffer} from 'buffer';
 export function translateMessage(thing, body, headers) {
     let result = {};
     console.log(body.urn.split(':'));
-    console.log(thing.getThingId());
+    console.log(thing.thingId);
     console.log(JSON.stringify(thing));
     console.log("hallo");
     try {
