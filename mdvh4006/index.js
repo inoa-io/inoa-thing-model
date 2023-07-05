@@ -43,13 +43,37 @@ export function translateMessage(thing, body, headers) {
     return result;
 }
 
-const FUNCTION_CODE_POWER_IN = 0x0000;
-const FUNCTION_CODE_POWER_OUT = 0x0000;
-const FUNCTION_CODE_OBIS_1_8_0 = 0x0000;
-const FUNCTION_CODE_OBIS_2_8_0 = 0x0000;
+const REGISTER_OFFSET_POWER_IN = 0x0000;
+const REGISTER_OFFSET_POWER_OUT = 0x0002;
+const REGISTER_OFFSET_OBIS_1_8_0 = 0x4000;
+const REGISTER_OFFSET_OBIS_2_8_0 = 0x4100;
+
+const mappings = {
+    power_in: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_POWER_IN,
+        numberOfRegisters: 2
+    },
+    power_out: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_POWER_OUT,
+        numberOfRegisters: 2
+    },
+    obis_1_8_0: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_OBIS_1_8_0,
+        numberOfRegisters: 2
+    },
+    obis_2_8_0: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_OBIS_2_8_0,
+        numberOfRegisters: 2
+    }    
+}
 
 export function generateSatelliteConfig(gateway, things) {
-
-    new Uint8Array([3,]);
+    console.log(mappings);
     return {};
 }
+
+// urn:dvh4013:33011653:0x4100
