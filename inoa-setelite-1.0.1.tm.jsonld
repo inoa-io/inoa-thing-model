@@ -11,12 +11,12 @@
   "title": "INOA Satellite",
   "description": "A INOA Satellite",
   "version": {
-    "model": "1.0.1"
+    "model": "1.0.2"
   },
   "links": [
     {
       "rel": "tm:submodel",
-      "href": "https://raw.githubusercontent.com/inoa-io/inoa-thing-model/main/hono-gateway-1.0.0.tm.jsonld",
+      "href": "https://raw.githubusercontent.com/inoa-io/inoa-thing-model/main/hono-gateway-1.0.1.tm.jsonld",
       "type": "application/tm+json",
       "instanceName": "Hono"
     }
