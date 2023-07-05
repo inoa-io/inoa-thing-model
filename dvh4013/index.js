@@ -4,6 +4,8 @@ export function translateMessage(thing, body, headers) {
     let result = {};
     console.log(body.urn.split(':'));
     console.log(thing.thingId);
+    console.log(thing.attributes);
+    console.log(thing.attributes.serial);
     console.log(JSON.stringify(thing));
     console.log("hallo");
     try {
