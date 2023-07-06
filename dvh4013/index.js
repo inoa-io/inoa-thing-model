@@ -79,7 +79,7 @@ export function generateSatelliteConfig(gateway, thing) {
     const modbus_interface = thing.attributes.modbus_interface;
     const channels = thing.attributes.channels;
     const hex = (serial % 100).toString();
-    const slaveId = new Uint8ClampedArray([parseInt(hex, 16)]);
+    const slaveId = parseInt(hex, 16);
     console.log(slaveId);
     const res = [];
     for (const [key, value] of Object.entries(mappings)) {
