@@ -74,7 +74,8 @@ const mappings = {
     }    
 }
 
-export function generateSatelliteConfig(gateway, things) {
-    console.log(mappings);
+export function generateSatelliteConfig(gateway, thing) {
+    const serial = parseInt(thing.attributes.serial, 10);
+    console.log((serial % 100).toString());
     return {};
 }
