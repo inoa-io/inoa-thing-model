@@ -81,8 +81,12 @@ export function generateSatelliteConfig(gateway, thing) {
     const hex = (serial % 100).toString();
     const slaveId = parseInt(hex, 16);
     console.log(slaveId);
-    return [{
-        frame: Buffer.from(ModbusUtils.buildFrame(1,1,1,1)).toString('base64'),
-        timeout: 500
-    }];
+    const res = [];
+    for (const [key, value] of map) {
+        res.push({
+            frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
+            timeout: 500
+        })
+    }
+    return res;
 }
