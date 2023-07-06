@@ -82,6 +82,7 @@ export function generateSatelliteConfig(gateway, thing) {
     const slaveId = parseInt(hex, 16);
     console.log(slaveId);
     return [{
-        value: ModbusUtils.buildFrame(1,1,1,1)
+        frame: Buffer.from(ModbusUtils.buildFrame(1,1,1,1)).toString('base64'),
+        timeout: 500
     }];
 }
