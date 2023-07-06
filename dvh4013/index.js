@@ -85,7 +85,8 @@ export function generateSatelliteConfig(gateway, thing) {
     for (const [key, value] of Object.entries(mappings)) {
         res.push({
             frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
-            timeout: 500
+            timeout: 500,
+            urn: `urn:${thing.attributes.deviceType}:${serial}:${value.registerOffset.toString(16).padStart(4,'0')}`
         })
     }
     return res;
