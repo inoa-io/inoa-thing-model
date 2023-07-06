@@ -2,12 +2,6 @@ import {Buffer} from 'buffer';
 
 export function translateMessage(thing, body, headers) {
     let result = {};
-    console.log(body.urn.split(':'));
-    console.log(thing.thingId);
-    console.log(thing.attributes);
-    console.log(thing.attributes.serial);
-    console.log(JSON.stringify(thing));
-    console.log("hallo");
     try {
         const buffer = Buffer.from(body.value, 'base64');
         const hexString = buffer.toString('hex');
@@ -74,19 +68,25 @@ const mappings = {
     }    
 }
 
-export function generateSatelliteConfig(gateway, thing) {
+export function generateSatelliteConfig(thing) {
     const serial = parseInt(thing.attributes.serial + 1, 10);
     const modbus_interface = thing.attributes.modbus_interface;
     const channels = thing.attributes.channels;
     const hex = (serial % 100).toString();
     const slaveId = parseInt(hex, 16);
-    console.log(slaveId);
+    if (slaveId > 255) {
+        console.error(`slaveId greater then 255 id: ${slaveId} -- serial: ${serial}`);
+    }
     const res = [];
     for (const [key, value] of Object.entries(mappings)) {
         res.push({
+            type: "RS485",
+            name: serial,
+            interval: 30000,
+            interface: modbus_interface,
             frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
             timeout: 500,
-            urn: `urn:${thing.attributes.thingType}:${serial}:${value.registerOffset.toString(16).padStart(4,'0')}`
+            id: `urn:${thing.attributes.thingType}:${serial}:x${value.registerOffset.toString(16).padStart(4,'0')}`
         })
     }
     return res;
