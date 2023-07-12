@@ -1,7 +1,7 @@
 import {Buffer} from 'buffer';
 
 export function translateMessage(thing, body, headers) {
-    let result = {};
+    let result = [];
     try {
         const buffer = Buffer.from(body.value, 'base64');
         const hexString = buffer.toString('hex');
@@ -26,12 +26,14 @@ export function translateMessage(thing, body, headers) {
         const dataEndIndex = 2 * byteCount + 6;
         const data = hexString.substring(6, dataEndIndex);
 
-        result.value = {
+        result.push({
+            urn: body.urn,
+            thingId: thing.thingId,
             hexString: hexString,
             slaveIdHex: slaveIdHex,
             data: parseInt(data, 16)
 
-        };
+        });
     } catch (e) {
         result.error = e.message;
         console.error(e);
