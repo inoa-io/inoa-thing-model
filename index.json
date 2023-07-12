@@ -1,6 +1,7 @@
 {
     "models": [
         "dvh4013",
-        "mdvh4006"
+        "mdvh4006",
+        "satellite"
     ]
 }
