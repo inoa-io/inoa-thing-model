@@ -1,0 +1,4 @@
+{
+    "name": "dvmodbusir",
+    "definition": "io.inoa.thing:DvModbusIR"
+}

@@ -2,6 +2,7 @@
     "models": [
         "dvh4013",
         "mdvh4006",
-        "satellite"
+        "satellite",
+        "dvmodbusir"
     ]
 }
