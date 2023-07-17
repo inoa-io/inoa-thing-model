@@ -46,6 +46,7 @@ export function translateMessage(thing, body, headers) {
         result.push({
             urn: body.urn,
             thingId: thing.thingId,
+            serial: thing.attributes.serial,
             hexString: hexString,
             slaveIdHex: slaveIdHex,
             value: parseInt(data, 16),
