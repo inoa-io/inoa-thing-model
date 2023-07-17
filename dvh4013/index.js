@@ -48,6 +48,18 @@ export function translateMessage(thing, body, headers) {
               label = 'work_out';
               unit = 'watthour';
               break;
+            case '0x0000':
+              label = 'power_in';
+              unit = 'watt';
+              obisCode = 'no_obis_code_found';
+              obisCodeShort = 'no_obis_code_found';
+              break;
+            case '0x0002':
+              label = 'power_out';
+              unit = 'watt';
+              obisCode = 'no_obis_code_found';
+              obisCodeShort = 'no_obis_code_found';
+              break;
             default:
               obisCode = 'no_obis_code_found';
           }
