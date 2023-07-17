@@ -31,16 +31,22 @@ export function translateMessage(thing, body, headers) {
 
         let obisCode = '';
         let obisCodeShort = '';
+        let label = '';
+        let unit = '';
         switch(parts[3]) {
             case '0x4000':
             case '0x4001':
               obisCode = '1-0:1.8.0';
               obisCodeShort = '1.8.0';
+              label = 'work_in';
+              unit = 'watthour';
               break;
             case '0x4100':
             case '0x4101':
               obisCode = '1-0:2.8.0';
               obisCodeShort = '2.8.0';
+              label = 'work_out';
+              unit = 'watthour';
               break;
             default:
               obisCode = 'no_obis_code_found';
@@ -52,6 +58,8 @@ export function translateMessage(thing, body, headers) {
             value: parseInt(data, 16),
             obisCode: obisCode,
             obisCodeShort: obisCodeShort,
+            label: label,
+            unit: unit,
             tenantId: tenantId,
             gatewayId: gatewayId
 
