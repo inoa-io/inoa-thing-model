@@ -36,33 +36,35 @@ export function translateMessage(thing, body, headers) {
         let value = undefined;
         switch(parts[3]) {
             case '0x4000':
-            obisCode = '1-0:1.8.0';
-            obisCodeShort = '1.8.0';
-            label = 'work_in';
-            unit = 'watthour';
-            value = parseInt(data, 16);
-            break;
+            case '0x4001':
+                obisCode = '1-0:1.8.0';
+                obisCodeShort = '1.8.0';
+                label = 'work_in';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
             case '0x4100':
-            obisCode = '1-0:2.8.0';
-            obisCodeShort = '2.8.0';
-            label = 'work_out';
-            unit = 'watthour';
-            value = parseInt(data, 16);
-            break;
+            case '0x4101':
+                obisCode = '1-0:2.8.0';
+                obisCodeShort = '2.8.0';
+                label = 'work_out';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
             case '0x0000':
-            label = 'power_in';
-            unit = 'watt';
-            obisCode = 'no_obis_code_found';
-            obisCodeShort = 'no_obis_code_found';
-            value = parseInt(data, 16) * 0.1;
-            break;
+                label = 'power_in';
+                unit = 'watt';
+                obisCode = 'no_obis_code_found';
+                obisCodeShort = 'no_obis_code_found';
+                value = parseInt(data, 16) * 0.1;
+                break;
             case '0x0002':
-            label = 'power_out';
-            unit = 'watt';
-            obisCode = 'no_obis_code_found';
-            obisCodeShort = 'no_obis_code_found';
-            value = parseInt(data, 16) * 0.1;
-            break;
+                label = 'power_out';
+                unit = 'watt';
+                obisCode = 'no_obis_code_found';
+                obisCodeShort = 'no_obis_code_found';
+                value = parseInt(data, 16) * 0.1;
+                break;
             default:
             obisCode = 'no_obis_code_found';
         }
