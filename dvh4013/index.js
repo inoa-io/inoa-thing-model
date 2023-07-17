@@ -9,6 +9,7 @@ export function translateMessage(thing, body, headers) {
         const slaveIdHex = hexString.substring(0, 2);
         const functionCode = hexString.substring(2, 4);
         const gatewayId = headers['gatewayName'] || headers['device_id'];
+        const tenantId = headers['tenant_id'];
 
         if (parseInt(functionCode, 16) !== 3) {
             const message = `Retrieved modbus error message (functionCode ${functionCode}) with error ${parseInt(hexString.substring(4, 6), 16)}`;
@@ -50,6 +51,7 @@ export function translateMessage(thing, body, headers) {
             value: parseInt(data, 16),
             obisCode: obisCode,
             obisCodeShort: obisCodeShort,
+            tenantId: tenantId,
             gatewayId: gatewayId
 
         });
