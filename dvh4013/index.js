@@ -33,6 +33,7 @@ export function translateMessage(thing, body, headers) {
         let obisCodeShort = '';
         let label = '';
         let unit = '';
+        let value = undefined;
         switch(parts[3]) {
             case '0x4000':
             case '0x4001':
@@ -40,6 +41,7 @@ export function translateMessage(thing, body, headers) {
               obisCodeShort = '1.8.0';
               label = 'work_in';
               unit = 'watthour';
+              value = parseInt(data, 16);
               break;
             case '0x4100':
             case '0x4101':
@@ -47,18 +49,21 @@ export function translateMessage(thing, body, headers) {
               obisCodeShort = '2.8.0';
               label = 'work_out';
               unit = 'watthour';
+              value = parseInt(data, 16);
               break;
             case '0x0000':
               label = 'power_in';
               unit = 'watt';
               obisCode = 'no_obis_code_found';
               obisCodeShort = 'no_obis_code_found';
+              value = parseInt(data, 16) * 0.1;
               break;
             case '0x0002':
               label = 'power_out';
               unit = 'watt';
               obisCode = 'no_obis_code_found';
               obisCodeShort = 'no_obis_code_found';
+              value = parseInt(data, 16) * 0.1;
               break;
             default:
               obisCode = 'no_obis_code_found';
@@ -67,7 +72,7 @@ export function translateMessage(thing, body, headers) {
             urn: body.urn,
             thingId: thing.thingId,
             serial: thing.attributes.serial,            
-            value: parseInt(data, 16),
+            value: value,
             obisCode: obisCode,
             obisCodeShort: obisCodeShort,
             label: label,
