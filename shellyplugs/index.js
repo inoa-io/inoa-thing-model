@@ -3,9 +3,7 @@ import {Buffer} from 'buffer';
 export function translateMessage(thing, body, headers) {
     let result = [];
     try {
-        console.log(JSON.stringify(body));
         const buffer = Buffer.from(body.value, 'base64');
-        console.log(buffer);
         const data = JSON.parse(buffer);
 
         const gatewayId = headers['gatewayName'] || headers['device_id'];
