@@ -8,6 +8,7 @@ export function translateMessage(thing, body, headers) {
         const hexString = buffer.toString('hex');
         const slaveIdHex = hexString.substring(0, 2);
         const functionCode = hexString.substring(2, 4);
+        const gatewayId = headers['gatewayName'] || headers['device_id'];
 
         if (parseInt(functionCode, 16) !== 3) {
             const message = `Retrieved modbus error message (functionCode ${functionCode}) with error ${parseInt(hexString.substring(4, 6), 16)}`;
@@ -33,7 +34,7 @@ export function translateMessage(thing, body, headers) {
               obisCode = '1-0:1.8.0';
               break;
             case '0x4100':
-              obisCode = '2-0:1.8.0';
+              obisCode = '1-0:2.8.0';
               break;
             default:
               obisCode = 'no_obis_code_found';
@@ -45,6 +46,7 @@ export function translateMessage(thing, body, headers) {
             slaveIdHex: slaveIdHex,
             value: parseInt(data, 16),
             obis: obisCode,
+            gatewayId: gatewayId
 
         });
     } catch (e) {
