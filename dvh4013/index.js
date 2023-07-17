@@ -29,12 +29,15 @@ export function translateMessage(thing, body, headers) {
         const data = hexString.substring(6, dataEndIndex);
 
         let obisCode = '';
+        let obisCodeShort = '';
         switch(parts[3]) {
             case '0x4000':
               obisCode = '1-0:1.8.0';
+              obisCodeShort = '1.8.0';
               break;
             case '0x4100':
               obisCode = '1-0:2.8.0';
+              obisCodeShort = '2.8.0';
               break;
             default:
               obisCode = 'no_obis_code_found';
@@ -45,7 +48,8 @@ export function translateMessage(thing, body, headers) {
             hexString: hexString,
             slaveIdHex: slaveIdHex,
             value: parseInt(data, 16),
-            obis: obisCode,
+            obisCode: obisCode,
+            obisCodeShort: obisCodeShort,
             gatewayId: gatewayId
 
         });
