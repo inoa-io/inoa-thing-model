@@ -33,10 +33,12 @@ export function translateMessage(thing, body, headers) {
         let obisCodeShort = '';
         switch(parts[3]) {
             case '0x4000':
+            case '0x4001':
               obisCode = '1-0:1.8.0';
               obisCodeShort = '1.8.0';
               break;
             case '0x4100':
+            case '0x4101':
               obisCode = '1-0:2.8.0';
               obisCodeShort = '2.8.0';
               break;
@@ -46,9 +48,7 @@ export function translateMessage(thing, body, headers) {
         result.push({
             urn: body.urn,
             thingId: thing.thingId,
-            serial: thing.attributes.serial,
-            hexString: hexString,
-            slaveIdHex: slaveIdHex,
+            serial: thing.attributes.serial,            
             value: parseInt(data, 16),
             obisCode: obisCode,
             obisCodeShort: obisCodeShort,
