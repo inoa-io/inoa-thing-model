@@ -3,6 +3,7 @@ import {Buffer} from 'buffer';
 export function translateMessage(thing, body, headers) {
     let result = [];
     try {
+        const parts = body.urn.split(':');
         const buffer = Buffer.from(body.value, 'base64');
         const hexString = buffer.toString('hex');
         const slaveIdHex = hexString.substring(0, 2);
@@ -26,12 +27,24 @@ export function translateMessage(thing, body, headers) {
         const dataEndIndex = 2 * byteCount + 6;
         const data = hexString.substring(6, dataEndIndex);
 
+        let obisCode = '';
+        switch(parts[3]) {
+            case '0x4000':
+              obisCode = '1-0:1.8.0';
+              break;
+            case '0x4100':
+              obisCode = '2-0:1.8.0';
+              break;
+            default:
+              obisCode = 'no_obis_code_found';
+          }
         result.push({
             urn: body.urn,
             thingId: thing.thingId,
             hexString: hexString,
             slaveIdHex: slaveIdHex,
-            data: parseInt(data, 16)
+            value: parseInt(data, 16),
+            obis: obisCode,
 
         });
     } catch (e) {
