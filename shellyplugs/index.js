@@ -32,7 +32,8 @@ export function translateMessage(thing, body, headers) {
             label: 'power_in',
             unit: 'watt',
             tenantId: tenantId,
-            gatewayId: gatewayId
+            gatewayId: gatewayId,
+            timestamp: body.timestamp
         });
 
         result.push({

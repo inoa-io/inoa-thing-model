@@ -78,7 +78,8 @@ export function translateMessage(thing, body, headers) {
             label: label,
             unit: unit,
             tenantId: tenantId,
-            gatewayId: gatewayId
+            gatewayId: gatewayId,
+            timestamp: body.timestamp
 
         });
     } catch (e) {
