@@ -42,6 +42,20 @@ export function translateMessage(thing, body, headers) {
                 unit = 'watthour';
                 value = parseInt(data, 16);
                 break;
+            case '0x0012':
+                obisCode = '1-0:1.8.1';
+                obisCodeShort = '1.8.1';
+                label = 'work_in';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
+            case '0x0017':
+                obisCode = '1-0:1.8.2';
+                obisCodeShort = '1.8.2';
+                label = 'work_in';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
             case '0x001C':
                 obisCode = '1-0:2.8.0';
                 obisCodeShort = '2.8.0';
@@ -49,6 +63,21 @@ export function translateMessage(thing, body, headers) {
                 unit = 'watthour';
                 value = parseInt(data, 16);
                 break;
+            case '0x0021':
+                obisCode = '1-0:2.8.1';
+                obisCodeShort = '2.8.1';
+                label = 'work_out';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
+            case '0x0026':
+                obisCode = '1-0:2.8.2';
+                obisCodeShort = '2.8.2';
+                label = 'work_out';
+                unit = 'watthour';
+                value = parseInt(data, 16);
+                break;
+
             case '0x002B':
                 label = 'power_in';
                 unit = 'watt';
