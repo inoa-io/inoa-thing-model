@@ -120,10 +120,10 @@ const mappings = {
 export function generateSatelliteConfig(thing) {
     const res = [];
     try {
-        const serial = parseInt(thing.attributes.serial + 1, 10);
+        const serial = parseInt(thing.attributes.serial, 10);
         const modbus_interface = thing.attributes.modbus_interface;
         const channels = thing.attributes.channels;
-        const hex = (serial % 100).toString();
+        const hex = ((serial + 1) % 100).toString();
         const slaveId = parseInt(hex, 16);
         if (slaveId > 255) {
             console.error(`slaveId greater then 255 id: ${slaveId} -- serial: ${serial}`);
