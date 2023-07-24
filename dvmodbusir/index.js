@@ -112,6 +112,48 @@ export function translateMessage(thing, body, headers) {
 
 
 
-export function generateSatelliteConfig(gateway, things) {
-    return {};
+const FUNCTION_CODE_SERIAL_NUMBER = 0x000B;
+const REGISTER_OFFSET_OBIS_1_8_0 = 0x000D;
+const REGISTER_OFFSET_OBIS_1_8_1 = 0x0012;
+const REGISTER_OFFSET_OBIS_1_8_2 = 0x0017;
+const REGISTER_OFFSET_OBIS_2_8_0 = 0x001C;
+const REGISTER_OFFSET_OBIS_2_8_1 = 0x0021;
+const REGISTER_OFFSET_OBIS_2_8_2 = 0x0026;
+const FUNCTION_CODE_OBIS_1_7_0 = 0x002B;
+
+const mappings = {
+    obis_1_8_0: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_OBIS_1_8_0,
+        numberOfRegisters: 2
+    },
+    obis_2_8_0: {
+        functionCode: 3,
+        registerOffset: REGISTER_OFFSET_OBIS_2_8_0,
+        numberOfRegisters: 2
+    }
+}
+
+export function generateSatelliteConfig(thing) {
+    const serial = parseInt(thing.attributes.serial + 1, 10);
+    const modbus_interface = thing.attributes.modbus_interface;
+    const channels = thing.attributes.channels;
+    const hex = (serial % 1000).toString();
+    const slaveId = parseInt(hex, 16);
+    if (slaveId > 255) {
+        console.error(`slaveId greater then 255 id: ${slaveId} -- serial: ${serial}`);
+    }
+    const res = [];
+    for (const [key, value] of Object.entries(mappings)) {
+        res.push({
+            type: "RS485",
+            name: serial,
+            interval: 30000,
+            interface: modbus_interface,
+            frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
+            timeout: 500,
+            id: `urn:${thing.attributes.thingType}:${serial}:x${value.registerOffset.toString(16).padStart(4,'0')}`
+        })
+    }
+    return res;
 }
