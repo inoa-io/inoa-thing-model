@@ -136,7 +136,7 @@ export function generateSatelliteConfig(thing) {
                 interface: modbus_interface,
                 frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
                 timeout: 500,
-                id: `urn:${thing.attributes.thingType}:${serial}:x${value.registerOffset.toString(16).padStart(4,'0')}`
+                id: `urn:${thing.attributes.thingType}:${serial}:0x${value.registerOffset.toString(16).padStart(4,'0')}`
             })
         }
     } catch (e) {
