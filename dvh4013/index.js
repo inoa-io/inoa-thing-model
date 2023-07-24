@@ -83,7 +83,6 @@ export function translateMessage(thing, body, headers) {
 
         });
     } catch (e) {
-        result.error = e.message;
         console.error(e);
 
     }
@@ -119,25 +118,29 @@ const mappings = {
 }
 
 export function generateSatelliteConfig(thing) {
-    const serial = parseInt(thing.attributes.serial + 1, 10);
-    const modbus_interface = thing.attributes.modbus_interface;
-    const channels = thing.attributes.channels;
-    const hex = (serial % 100).toString();
-    const slaveId = parseInt(hex, 16);
-    if (slaveId > 255) {
-        console.error(`slaveId greater then 255 id: ${slaveId} -- serial: ${serial}`);
-    }
     const res = [];
-    for (const [key, value] of Object.entries(mappings)) {
-        res.push({
-            type: "RS485",
-            name: serial,
-            interval: 30000,
-            interface: modbus_interface,
-            frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
-            timeout: 500,
-            id: `urn:${thing.attributes.thingType}:${serial}:x${value.registerOffset.toString(16).padStart(4,'0')}`
-        })
+    try {
+        const serial = parseInt(thing.attributes.serial + 1, 10);
+        const modbus_interface = thing.attributes.modbus_interface;
+        const channels = thing.attributes.channels;
+        const hex = (serial % 100).toString();
+        const slaveId = parseInt(hex, 16);
+        if (slaveId > 255) {
+            console.error(`slaveId greater then 255 id: ${slaveId} -- serial: ${serial}`);
+        }
+        for (const [key, value] of Object.entries(mappings)) {
+            res.push({
+                type: "RS485",
+                name: serial,
+                interval: 30000,
+                interface: modbus_interface,
+                frame: Buffer.from(ModbusUtils.buildFrame(slaveId,value.functionCode,value.registerOffset,value.numberOfRegisters)).toString('base64'),
+                timeout: 500,
+                id: `urn:${thing.attributes.thingType}:${serial}:x${value.registerOffset.toString(16).padStart(4,'0')}`
+            })
+        }
+    } catch (e) {
+        console.error(e);
     }
     return res;
 }
