@@ -11,6 +11,11 @@ export function translateMessage(thing, body, headers) {
         const gatewayId = headers['gatewayName'] || headers['device_id'];
         const tenantId = headers['tenant_id'];
 
+        if (!CRC16.isValid(buffer)) {
+            console.log(`Retrieved invalid modbus message (crc16): ${hexString}`);
+            return result;
+        }
+
         if (parseInt(functionCode, 16) !== 3) {
             const message = `Retrieved modbus error message (functionCode ${functionCode}) with error ${parseInt(hexString.substring(4, 6), 16)}`;
             console.log(message);
