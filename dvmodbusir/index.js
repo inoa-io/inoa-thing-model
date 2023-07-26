@@ -40,7 +40,7 @@ export function translateMessage(thing, body, headers) {
                 obisCodeShort = '1.8.0';
                 label = 'work_in';
                 unit = 'watthour';
-                value = parseInt(data, 16);
+                value = parseInt(data, 16) * 0.1;
                 break;
             case '0x0012':
                 obisCode = '1-0:1.8.1';
@@ -61,7 +61,7 @@ export function translateMessage(thing, body, headers) {
                 obisCodeShort = '2.8.0';
                 label = 'work_out';
                 unit = 'watthour';
-                value = parseInt(data, 16);
+                value = parseInt(data, 16) * 0.1;
                 break;
             case '0x0021':
                 obisCode = '1-0:2.8.1';
